@@ -6,24 +6,6 @@
 #include "HotKeys.h"
 #include "pattern_scan.hpp"
 
-struct FMinimalViewInfo
-{
-	FVector Location;
-	FRotator Rotation;
-	float FOV;
-	// etc
-};
-
-enum EStereoscopicPass
-{
-	eSSP_FULL,
-	eSSP_LEFT_EYE,
-	eSSP_RIGHT_EYE,
-	eSSP_LEFT_EYE_SIDE,
-	eSSP_RIGHT_EYE_SIDE,
-};
-
-
 
 // Class Engine.LocalPlayer
 struct ULocalPlayer : UPlayer {
@@ -32,11 +14,11 @@ struct ULocalPlayer : UPlayer {
 class DeepRockHook {
 	uint64_t base{};
 
-	const uint64_t callQianBaoFire_offset{ 0x1667360 };
+	void* callQianBaoFire{ };
 	const char* callQianBaoFire_pattern = "48 8B C4 56 48 81 EC ? ? ? ? 48 8B F1 0F 29 78 C8";
-	const uint64_t qianBaoFire_offset{ 0x166BC20 };
+	void* qianBaoFire{ };
 	const char* qianBaoFire_pattern = "40 55 53 56 57 48 8D 6C 24 D8 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0";
-	const uint64_t qianBaoAddCd_offset{ 0x16C8D40 };
+	void* qianBaoAddCd{ };
 	const char* qianBaoAddCd_pattern = "48 89 5C 24 08 57 48 83 EC ? 0F B6 B9 50 03 00 00";
 
 	static void* callQianBaoFire_origin;
@@ -82,33 +64,45 @@ public:
 		MH_Initialize();
 	}
 	~DeepRockHook() {
-		MH_DisableHook((void*)(base + callQianBaoFire_offset));
-		MH_DisableHook((void*)(base + qianBaoFire_offset));
-		MH_DisableHook((void*)(base + qianBaoAddCd_offset));
+		MH_DisableHook(callQianBaoFire);
+		MH_DisableHook(qianBaoFire);
+		MH_DisableHook(qianBaoAddCd);
 		MH_Uninitialize();
 	}
 
 
 	bool init() {
+			
+		callQianBaoFire = Scanner::PatternScan("FSD-Win64-Shipping.exe", callQianBaoFire_pattern);
+		qianBaoFire = Scanner::PatternScan("FSD-Win64-Shipping.exe", qianBaoFire_pattern);
+		qianBaoAddCd = Scanner::PatternScan("FSD-Win64-Shipping.exe", qianBaoAddCd_pattern);
 
-		auto ret_5 = MH_CreateHook(/*(void*)(base + callQianBaoFire_offset)*/
-			Scanner::PatternScan("FSD-Win64-Shipping.exe" , callQianBaoFire_pattern),
+		if (!callQianBaoFire || !qianBaoFire || !qianBaoAddCd) {
+			MessageBox(NULL, "提示", "请通知作者特征已失效", 0);
+			return false;
+		}
+
+
+		auto ret_5 = MH_CreateHook(
+			callQianBaoFire,
 			myCallQianBaoFire,
 			&callQianBaoFire_origin);
-		auto ret_6 = MH_EnableHook((void*)(base + callQianBaoFire_offset));
+		auto ret_6 = MH_EnableHook(callQianBaoFire);
 
-		auto ret_7 = MH_CreateHook(/*(void*)(base + qianBaoFire_offset)*/
-			Scanner::PatternScan("FSD-Win64-Shipping.exe", qianBaoFire_pattern),
+		auto ret_7 = MH_CreateHook(
+			qianBaoFire,
 			myQianBaoFire, 
 			&qianBaoFire_origin);
-		auto ret_8 = MH_EnableHook((void*)(base + qianBaoFire_offset));
+		auto ret_8 = MH_EnableHook(qianBaoFire);
 		
-		auto ret_9 = MH_CreateHook(/*(void*)(base + qianBaoAddCd_offset)*/
-			Scanner::PatternScan("FSD-Win64-Shipping.exe", qianBaoAddCd_pattern),
+		auto ret_9 = MH_CreateHook(
+			qianBaoAddCd,
 			myQianBaoAddCd,
 			&qianBaoAddCd_origin);
-		auto ret_10 = MH_EnableHook((void*)(base + qianBaoAddCd_offset));
-		return true;
+		auto ret_10 = MH_EnableHook(qianBaoAddCd);
+
+
+		return ret_5 && ret_6 && ret_7 && ret_8 && ret_9 && ret_10;
 	}
 
 };
