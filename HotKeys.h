@@ -4,21 +4,21 @@
 namespace HotKeys {
 
 	namespace Other {
-		inline bool aimbotActive = false; //Ãé×¼¸¨Öú
-		inline float  aimRange = 200.f;  // Ãé×¼·¶Î§
-		inline bool drawBonesActive = false; // »æÖÆ¹Ç÷À
+		inline bool aimbotActive = false; //ç„å‡†è¾…åŠ©
+		inline float  aimRange = 200.f;  // ç„å‡†èŒƒå›´
+		inline bool drawBonesActive = false; // ç»˜åˆ¶éª¨éª¼
 		inline bool draw2DBoundingBoxActive = false; // 2d
 		inline bool draw3DBoundingBoxActive = false; // 3d
-		inline bool drawNamesActive = false;         // »æÖÆÃû×Ö
-		inline bool drawPlayerNamesActive = false;   // »æÖÆÍæ¼ÒÃû³Æ
-		inline bool infiniteAmmoActive = false;      // ÎŞÏß×Óµ¯ÎŞĞ§
-		inline bool removeRecoilActive = false;      // ÒÆ³ıºó×øÁ¦ÎŞĞ§
+		inline bool drawNamesActive = false;         // ç»˜åˆ¶åå­—
+		inline bool drawPlayerNamesActive = false;   // ç»˜åˆ¶ç©å®¶åç§°
+		inline bool infiniteAmmoActive = false;      // æ— çº¿å­å¼¹æ— æ•ˆ
+		inline bool removeRecoilActive = false;      // ç§»é™¤åååŠ›æ— æ•ˆ
 	}
-	//Ç¹ÊÖ
+	//æªæ‰‹
 	namespace Shooter {
 
-		inline bool qianBaoCdActive = false; //Ç¦±¬¿¨ºìÎÂ
-		inline bool qianBaoinfiniteAmmoActive = false; //Ç¦±¬ÎŞÏŞ×Óµ¯
-		inline bool qianBaoNoPre = false; //!<Ç¦±¬ÎŞÔ¤ÈÈ
+		inline bool qianBaoCdActive = false; //é“…çˆ†å¡çº¢æ¸©
+		inline bool qianBaoinfiniteAmmoActive = false; //é“…çˆ†æ— é™å­å¼¹
+		inline bool qianBaoNoPre = false; //!<é“…çˆ†æ— é¢„çƒ­
 	}
 }

@@ -1,8 +1,16 @@
 cmake_minimum_required(VERSION 3.5)
 set(CMAKE_CXX_STANDARD 17)
-project(deep_rock_hack VERSION 1.0.1)
+project(deep_rock_hack VERSION 1.0.2)
 add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+# 配置生成 config.h
+configure_file(
+        ${CMAKE_SOURCE_DIR}/config.h.in   # 输入模板文件路径
+        ${CMAKE_SOURCE_DIR}/config.h      # 输出生成的文件路径
+        @ONLY                             # 只替换 CMake 变量
+)
+
 set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_LIST_DIR}/minhook_debug_x64/lib/minhook) #设置minhook路径
 link_directories(dx11_imgui_lib/lib)
 include_directories(dx11_imgui_lib/include)
