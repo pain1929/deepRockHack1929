@@ -16,5 +16,6 @@ DeepRockFuncHook.cpp  )
 target_link_libraries(${PROJECT_NAME} d3d11.lib minhook::minhook dx11_imgui_lib.lib)
 
 
-
+link_directories(${CMAKE_CURRENT_LIST_DIR}/fromGithub)
 add_executable(Launcher appMain.cpp )
+target_link_libraries(Launcher PRIVATE fromGithub.lib)

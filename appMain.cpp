@@ -2,6 +2,49 @@
 #include "inj.hpp"
 #include <iostream>
 #include <filesystem>
+#include "fromGithub/fromGithub.h"
+
+GoString toGoStr(const char * s) {
+	return { s , (int64_t )strlen(s) };
+}
+std::string toStdStr(GoString s) {
+	return std::string(s.p);
+}
+
+
+void updateFromGithub() {
+
+	 const char* currentVer = "1.0.0";
+	 const char*  saveTo = "./newVersion.zip";
+
+
+     const char * uname = "pain1929";
+     const char * rep = "deepRockHack1929";
+     const char * fileName = "README.md";
+
+
+	// ��� readMe �ļ�
+	auto readMe = GetTextFromGithub(toGoStr(uname), toGoStr(rep), toGoStr(fileName));
+	if (readMe) {
+		std::cout << readMe << std::endl;
+	}
+	
+
+
+	// �������³���
+	std::cout << "��ʼ������ ... " << std::endl;
+	auto ret = FromGithub(toGoStr(uname), toGoStr(rep), toGoStr(currentVer), toGoStr(saveTo));
+
+	if (ret) {
+		std::cout << "�°汾���³ɹ� ���浽 " << saveTo << " �������°汾" << std::endl;
+		system("pause");
+		exit(0);
+	}
+
+}
+
+
+
 class Utils {
 public:
 	static std::wstring getExePathW() {
@@ -22,6 +65,8 @@ public:
 
 int main(int argc , char* argv[]) {
 	
+	updateFromGithub();
+
 	const auto basePath = Utils::getExePath();
 
 	int pid{ 0 };
@@ -33,7 +78,7 @@ int main(int argc , char* argv[]) {
 		return -1;
 	}
 	if (!pid) {
-		std::cout << "FSD-Win64-Shipping not found" << std::endl;
+		std::cout << "δ�ҵ���Ϸ���� ����������Ϸ" << std::endl;
 		system("pause");
 		return -1;
 	}
@@ -41,21 +86,21 @@ int main(int argc , char* argv[]) {
 	
 
 	if (!InjectDll(handle, (basePath + "/dx11_imgui_lib.dll").c_str())) {
-		std::cout << "core module inj failed" << std::endl;
+		std::cout << "dx11_imgui_lib.dll ע��ʧ�ܣ�" << std::endl;
 		system("pause");
 		return -2;
 	}
-
+	std::cout << "dx11_imgui_lib.dll ע��ɹ���׼��ע��ڶ���ģ�� ��ȴ�..." << std::endl;
 	Sleep(3000);
 
 
 	if (!InjectDll(handle, (basePath + "/deep_rock_hack.dll").c_str())) {
-		std::cout << "core module inj failed" << std::endl;
+		std::cout << "deep_rock_hack.dll inj failed" << std::endl;
 		system("pause");
 		return -3;
 	}
 
-	std::cout << "succeed !" << std::endl;
+	std::cout << "ע��ɹ���" << std::endl;
 	system("pause");
 	return 0;
 
