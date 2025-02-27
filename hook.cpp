@@ -238,18 +238,13 @@ void DrawHotkeys(UCanvas* canvas)
 	const auto title = std::wstring(L"DeepRockHack1929 V") + CURRENT_VERSION_W + L"本软件开源免费 https://github.com/pain1929/deepRockHack1929 ";
 	canvas->K2_DrawText(TitleFont, FString(title.c_str()), titlePos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
 
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::aimbotActive ? L"F4 自动瞄准: ON" : L"F4 自动瞄准: OFF"), hotkey1Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::drawBonesActive ? L"F5 绘制骨骼（仅单人）: ON" : L"F5 绘制骨骼（仅单人）: OFF"), hotkey2Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::draw2DBoundingBoxActive ? L"F6 2DBOX（仅单人）: ON" : L"F6 2DBOX（仅单人）: OFF"), hotkey3Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::draw3DBoundingBoxActive ? L"F7 3DBOX（仅单人）: ON" : L"F7 3DBOX（仅单人）: OFF"), hotkey4Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::drawPlayerNamesActive ? L"F8 绘制玩家名称: ON" : L"F8 绘制玩家名称: OFF"), hotkey5Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::drawNamesActive ? L"F9 绘制怪物名字: ON" : L"F9 绘制怪物名字: OFF"), hotkey6Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Shooter::qianBaoCdActive ? L"F1 枪手·铅爆·卡红温: ON" : L"F1 枪手·铅爆·卡红温: OFF"), hotkey7Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Shooter::qianBaoNoPre ? L"F2 枪手·铅爆·高转速: ON" : L"F2 枪手·铅爆·高转速: OFF"), hotkey8Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
-	canvas->K2_DrawText(TitleFont, FString(HotKeys::Shooter::qianBaoinfiniteAmmoActive ? L"F3 枪手·铅爆·无限子弹: ON" : L"F3 枪手·铅爆·无限子弹: OFF"), hotkey9Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
+	canvas->K2_DrawText(TitleFont, FString(HotKeys::Shooter::qianBaoCdActive ? L"F5 枪手·铅爆·卡红温: ON" : L"F5 枪手·铅爆·卡红温: OFF"), hotkey1Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
+	canvas->K2_DrawText(TitleFont, FString(HotKeys::Shooter::qianBaoNoPre ? L"F6 枪手·铅爆·高转速: ON" : L"F6 枪手·铅爆·高转速: OFF"), hotkey2Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
+	canvas->K2_DrawText(TitleFont, FString(HotKeys::Shooter::qianBaoinfiniteAmmoActive ? L"F7 枪手·铅爆·无限子弹: ON" : L"F7 枪手·铅爆·无限子弹: OFF"), hotkey3Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
+	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::aimbotActive ? L"F8 自动瞄准: ON" : L"F8 自动瞄准: OFF"), hotkey4Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
+	canvas->K2_DrawText(TitleFont, FString(HotKeys::Other::drawPlayerNamesActive ? L"F9 绘制名称: ON" : L"F9 绘制名称: OFF"), hotkey5Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
 	std::wstring aimRangeTitle = L"PgUp+ PgDn- 自瞄范围 : " + std::to_wstring((int)HotKeys::Other::aimRange);
-	canvas->K2_DrawText(TitleFont, FString(aimRangeTitle.c_str()), hotkey10Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
+	canvas->K2_DrawText(TitleFont, FString(aimRangeTitle.c_str()), hotkey6Pos, scale, color, false, shadow, { 2.f, 2.f }, false, false, true, outline);
 }
 
 void DrawAimRange(UCanvas* canvas)

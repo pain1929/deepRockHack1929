@@ -14,18 +14,31 @@ void ClearingThread()
 	while (1)
 	{
 		if (GetAsyncKeyState(VK_END) & 1) { FreeLibraryAndExitThread(reinterpret_cast<HMODULE>(Dll), 0); }
-		if (GetAsyncKeyState(VK_F4) & 1) { HotKeys::Other::aimbotActive = !HotKeys::Other::aimbotActive; }
-		if (GetAsyncKeyState(VK_F5) & 1) { HotKeys::Other::drawBonesActive = !HotKeys::Other::drawBonesActive; }
-		if (GetAsyncKeyState(VK_F6) & 1) { HotKeys::Other::draw2DBoundingBoxActive = !HotKeys::Other::draw2DBoundingBoxActive; }
-		if (GetAsyncKeyState(VK_F7) & 1) { HotKeys::Other::draw3DBoundingBoxActive = !HotKeys::Other::draw3DBoundingBoxActive; }
-		if (GetAsyncKeyState(VK_F8) & 1) { HotKeys::Other::drawPlayerNamesActive = !HotKeys::Other::drawPlayerNamesActive; }
-		if (GetAsyncKeyState(VK_F9) & 1) { HotKeys::Other::drawNamesActive = !HotKeys::Other::drawNamesActive; }
 
-		if (GetAsyncKeyState(VK_F1) & 1) { HotKeys::Shooter::qianBaoCdActive = !HotKeys::Shooter::qianBaoCdActive; }
-		if (GetAsyncKeyState(VK_F2) & 1) { HotKeys::Shooter::qianBaoNoPre = !HotKeys::Shooter::qianBaoNoPre; }
-		if (GetAsyncKeyState(VK_F3) & 1) { HotKeys::Shooter::qianBaoinfiniteAmmoActive = !HotKeys::Shooter::qianBaoinfiniteAmmoActive; }
+		
+		//铅爆cd
+		if (GetAsyncKeyState(VK_F5) & 1) { HotKeys::Shooter::qianBaoCdActive = !HotKeys::Shooter::qianBaoCdActive; }
+		//铅爆无预热
+		if (GetAsyncKeyState(VK_F6) & 1) { HotKeys::Shooter::qianBaoNoPre = !HotKeys::Shooter::qianBaoNoPre; }
+		//铅爆无限子弹
+		if (GetAsyncKeyState(VK_F7) & 1) { HotKeys::Shooter::qianBaoinfiniteAmmoActive = !HotKeys::Shooter::qianBaoinfiniteAmmoActive; }
 
-		if (GetAsyncKeyState(VK_PRIOR) & 1) { HotKeys::Other::aimRange += 30; }
+		//自动瞄准
+		if (GetAsyncKeyState(VK_F8) & 1) { HotKeys::Other::aimbotActive = !HotKeys::Other::aimbotActive; }
+
+		//绘制名字
+		if (GetAsyncKeyState(VK_F9) & 1) {
+			HotKeys::Other::drawPlayerNamesActive = !HotKeys::Other::drawPlayerNamesActive;
+			HotKeys::Other::drawNamesActive = !HotKeys::Other::drawNamesActive;
+		}
+
+
+		//增加范围
+		if (GetAsyncKeyState(VK_PRIOR) & 1) {
+			HotKeys::Other::aimRange += 30; 
+		}
+
+		//减小范围
 		if (GetAsyncKeyState(VK_NEXT) & 1) { 
 			HotKeys::Other::aimRange = max(50, HotKeys::Other::aimRange - 30);
 		}
